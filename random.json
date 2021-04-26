@@ -1,0 +1,20 @@
+
+{     "name": "React Lake Campground",
+      "image": "images/react-lake.jpg",
+      "elevation": 1233,
+      "featured": false,
+      "cost": 65,
+      "description": "Nestled in the foothills of the Chrome Mountains, this campground on the shores of the pristine React Lake is a favorite for fly fishers.",
+      "comments": []
+}
+{
+  "username": "admin",
+  "password": "password",
+  "firstname": "Andrew",
+  "lastname": "Lee"
+}
+        {
+          "rating": 5,
+          "text": "What a magnificent view!",
+          "date": "2018-10-25T16:30Z"
+        }
