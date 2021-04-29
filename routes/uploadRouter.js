@@ -1,6 +1,7 @@
 const express = require("express");
 const authenticate = require("../authenticate");
 const multer = require("multer");
+const cors = require("./cors");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -24,10 +25,16 @@ const uploadRouter = express.Router();
 
 uploadRouter
   .route("/")
-  .get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
-    res.statusCode = 403;
-    res.end("GET operation not supported on /imageUpload");
-  })
+  .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+  .get(
+    cors.cors,
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res) => {
+      res.statusCode = 403;
+      res.end("GET operation not supported on /imageUpload");
+    }
+  )
   .post(
     authenticate.verifyUser,
     authenticate.verifyAdmin,
