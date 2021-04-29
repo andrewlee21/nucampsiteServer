@@ -36,6 +36,7 @@ uploadRouter
     }
   )
   .post(
+    cors.corsWithOptions,
     authenticate.verifyUser,
     authenticate.verifyAdmin,
     upload.single("imageFile"),
@@ -45,13 +46,23 @@ uploadRouter
       res.json(req.file);
     }
   )
-  .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
-    res.statusCode = 403;
-    res.end("PUT operation not supported on /imageUpload");
-  })
-  .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
-    res.statusCode = 403;
-    res.end("DELETE operation not supported on /imageUpload");
-  });
+  .put(
+    cors.corsWithOptions,
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res) => {
+      res.statusCode = 403;
+      res.end("PUT operation not supported on /imageUpload");
+    }
+  )
+  .delete(
+    cors.corsWithOptions,
+    authenticate.verifyUser,
+    authenticate.verifyAdmin,
+    (req, res) => {
+      res.statusCode = 403;
+      res.end("DELETE operation not supported on /imageUpload");
+    }
+  );
 
 module.exports = uploadRouter;
